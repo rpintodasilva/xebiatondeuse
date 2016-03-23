@@ -10,5 +10,4 @@ public enum Orientation {
 	E,
 	W,
 	S
-
 }

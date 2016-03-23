@@ -95,7 +95,7 @@ public class Tondeuse {
 	/**
 	 * Gère le déplacement de la tondeuse et plus seulement la rotation (A).
 	 */
-	public void activeDeplacementTondeuse(){
+	private void activeDeplacementTondeuse(){
 		int x = -1;
 		int y = -1;
 		switch(monOrientation){
@@ -127,7 +127,6 @@ public class Tondeuse {
 	 */
 	public boolean isPositionValide(Position p){
 		return ((p.getX()>=0 && p.getX()<=maPelouse.getX()) &&(p.getY()>=0 && p.getY()<=maPelouse.getY()));
-		
 	}
 	
 	/**
@@ -142,7 +141,7 @@ public class Tondeuse {
 	/**
 	 * Gère les modifications de l'orientation de la tondeuse en fonction d'une rotation à gauche.
 	 */
-	public void gereDeplacementGauche(){
+	private void gereDeplacementGauche(){
 		switch(monOrientation){
 			case N:
 				setMonOrientation(Orientation.W);
@@ -162,7 +161,7 @@ public class Tondeuse {
 	/**
 	 * Gère les modifications de l'orientation de la tondeuse en fonction d'une rotation à droite.
 	 */
-	public void gereDeplacementDroite(){
+	private void gereDeplacementDroite(){
 		switch(monOrientation){
 			case N:
 				setMonOrientation(Orientation.E);

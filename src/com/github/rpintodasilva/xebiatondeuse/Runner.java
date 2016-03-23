@@ -6,7 +6,9 @@
 package com.github.rpintodasilva.xebiatondeuse;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -36,10 +38,7 @@ public class Runner {
 		int l=1;
 		
 		try {
-			/* ouverture du fichier */
 			BufferedReader br = new BufferedReader(new FileReader(fichierIn));
-
-			/* lecture du fichier */
 			String ligneCour;
 			ligneCour = br.readLine();
 			while (ligneCour != null) {
@@ -64,10 +63,33 @@ public class Runner {
 				l++;
 			}
 			br.close();
+			verifieParametresOK();
 			lanceDeplacements();
+		} catch (FileNotFoundException e) {
+		    System.err.println(Exceptions.FILE_NOT_FOUND);
+		} catch (IOException e) {
+			System.err.println(Exceptions.FILE_IO_ERROR); 
 		} catch (Exception e) {
-			System.err.println("Erreur à la lecture du fichier.\n\n"+e.getMessage());
+			System.err.println(e.getMessage());
 		}
+	}
+
+	/**
+	 * On vérifie que tout est OK pour le lancement.
+	 * On génère une exception au besoin.
+	 * @throws Exception l'exception retournée si nécessaire
+	 */
+	private void verifieParametresOK() throws Exception{
+		if (t1 == null || t2 == null){
+			throw new Exception(Exceptions.FILE_TONDEUSE);
+		}
+		if (lDeplacementsT1 == null || lDeplacementsT2 == null){
+			throw new Exception(Exceptions.FILE_DEPLACEMENT);
+		}
+		if (p == null){
+			throw new Exception(Exceptions.FILE_PELOUSE);
+		}
+		
 	}
 
 	/**
@@ -124,7 +146,7 @@ public class Runner {
 	/**
 	 * Lance les déplacements des tondeuses d'après les paramètres récupérés.
 	 */
-	public void lanceDeplacements(){
+	private void lanceDeplacements(){
 		Iterator<Deplacement> lt1dep = lDeplacementsT1.iterator(); 
 		while (lt1dep.hasNext()){
 			t1.calculeNouvellePosition(lt1dep.next());

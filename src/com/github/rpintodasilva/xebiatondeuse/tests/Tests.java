@@ -14,6 +14,8 @@ import com.github.rpintodasilva.xebiatondeuse.Pelouse;
 import com.github.rpintodasilva.xebiatondeuse.Position;
 import com.github.rpintodasilva.xebiatondeuse.Tondeuse;
 
+
+
 public class Tests {	
 	@Test
 	public final void testCloneTondeuse() {
@@ -27,26 +29,26 @@ public class Tests {
 	@Test
 	public final void testDeplacementGauche() {
 		Tondeuse maTondeuse = new Tondeuse(new Position(0,0), Orientation.N, new Pelouse(5,5));
-		maTondeuse.gereDeplacementGauche();
+		maTondeuse.calculeNouvellePosition(Deplacement.G);
 		assertTrue("Nord vers Gauche : Ouest ", Orientation.W.equals(maTondeuse.getMonOrientation()));
-		maTondeuse.gereDeplacementGauche();
+		maTondeuse.calculeNouvellePosition(Deplacement.G);
 		assertTrue("Ouest vers Gauche : Sud ", Orientation.S.equals(maTondeuse.getMonOrientation()));
-		maTondeuse.gereDeplacementGauche();
+		maTondeuse.calculeNouvellePosition(Deplacement.G);
 		assertTrue("Sud vers Gauche : Est ", Orientation.E.equals(maTondeuse.getMonOrientation()));
-		maTondeuse.gereDeplacementGauche();
+		maTondeuse.calculeNouvellePosition(Deplacement.G);
 		assertTrue("Est vers Gauche : Nord ", Orientation.N.equals(maTondeuse.getMonOrientation()));
 	}
 	
 	@Test
 	public final void testDeplacementDroite() {
 		Tondeuse maTondeuse = new Tondeuse(new Position(0,0), Orientation.N, new Pelouse(5,5));
-		maTondeuse.gereDeplacementDroite();
+		maTondeuse.calculeNouvellePosition(Deplacement.D);
 		assertTrue("Nord vers Droite : Est ", Orientation.E.equals(maTondeuse.getMonOrientation()));
-		maTondeuse.gereDeplacementDroite();
+		maTondeuse.calculeNouvellePosition(Deplacement.D);
 		assertTrue("Est vers Droite : Sud ", Orientation.S.equals(maTondeuse.getMonOrientation()));
-		maTondeuse.gereDeplacementDroite();
+		maTondeuse.calculeNouvellePosition(Deplacement.D);
 		assertTrue("Sud vers Droite : Ouest ", Orientation.W.equals(maTondeuse.getMonOrientation()));
-		maTondeuse.gereDeplacementDroite();
+		maTondeuse.calculeNouvellePosition(Deplacement.D);
 		assertTrue("Ouest vers Droite : Nord ", Orientation.N.equals(maTondeuse.getMonOrientation()));
 	}
 	
@@ -67,10 +69,10 @@ public class Tests {
 		Tondeuse maTondeuse = new Tondeuse(new Position(0,0), Orientation.N, new Pelouse(5,5));
 		maTondeuse.calculeNouvellePosition(Deplacement.A);
 		assertTrue("Nouvelle position : (0,1)", new Position(0,1).equals(maTondeuse.getMaPosition()));
-		maTondeuse.gereDeplacementDroite();
+		maTondeuse.calculeNouvellePosition(Deplacement.D);
 		maTondeuse.calculeNouvellePosition(Deplacement.A);
 		assertTrue("Nouvelle position : (1,1)", new Position(1,1).equals(maTondeuse.getMaPosition()));
-		maTondeuse.gereDeplacementDroite();
+		maTondeuse.calculeNouvellePosition(Deplacement.D);
 		maTondeuse.calculeNouvellePosition(Deplacement.A);
 		assertTrue("Nouvelle position : (1,0)", new Position(1,0).equals(maTondeuse.getMaPosition()));
 	}
